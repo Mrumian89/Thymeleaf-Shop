@@ -62,5 +62,10 @@ public class ShopController {
         return "product";
     }
 
+    @GetMapping("users")
+    public String Users(){
+        return "users";
+    }
+
 
 }
