@@ -7,10 +7,15 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import pl.edu.wszib.dao.ProductDao;
+import pl.edu.wszib.dao.UserDao;
 import pl.edu.wszib.domain.Product;
+import pl.edu.wszib.domain.User;
 
 @Controller
 public class ShopController {
+
+    @Autowired
+    private UserDao userDao;
 
     @Autowired
     private ProductDao productDao;
@@ -63,8 +68,34 @@ public class ShopController {
     }
 
     @GetMapping("users")
-    public String Users(){
+    public String users(Model model) {
+        model.addAttribute("users", userDao.getUser());
         return "users";
+    }
+
+    @GetMapping("users/new")
+    public String newUser(Model model) {
+        model.addAttribute("user", new User());
+        return "user";
+    }
+
+    @PostMapping("users/save")
+    public String saveNewUser(User user) {
+        userDao.saveUser(user);
+        return "redirect:/users";
+    }
+
+    @GetMapping("users/edit/{id}")
+    public String editUser(@PathVariable Long id, Model model) {
+        User user = userDao.getById(id);
+        model.addAttribute("user", user);
+        return "user";
+    }
+
+    @GetMapping("users/remove/{id}")
+    public String removeUser(@PathVariable Long id) {
+        userDao.removeUser(id);
+        return "redirect:/users";
     }
 
 

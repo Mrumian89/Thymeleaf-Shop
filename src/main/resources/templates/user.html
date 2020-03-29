@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org" th:replace="~{fragments/layout :: layout(~{::.container})}">
+<body>
+
+<div class="container">
+    <form style="width: 400px; margin: auto" th:action="@{/users/save}" th:object="${user}" method="post">
+        <div class="uk-margin">
+            <label>Login</label>
+            <input th:field="*{login}" class="uk-input" type="text" required>
+        </div>
+        <div class="uk-margin">
+            <label>email</label>
+            <input th:field="*{email}" type="email" step="0.01" class="uk-input" required>
+        </div>
+        <div class="uk-margin">
+            <label>Wiek</label>
+            <input th:field="*{age}" type="number" class="uk-input" required>
+        </div>
+        <div class="uk-margin">
+            <label>Narodowość</label>
+            <input th:field="*{country}" type="text" class="uk-input">
+        </div>
+        <div class="uk-margin">
+            <label>Aktywny</label>
+            <input th:field="*{active}" type="checkbox" class="uk-checkbox">
+        </div>
+        <input th:field="*{id}" hidden type="number">
+        <a th:href="@{/users}"><input class="uk-button uk-button-danger" type="button" value="Anuluj"></a>
+        <input class="uk-button uk-button-primary" type="submit" value="Zapisz">
+    </form>
+</div>
+</body>
+</html>
+
