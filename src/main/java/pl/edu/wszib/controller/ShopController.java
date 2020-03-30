@@ -11,6 +11,9 @@ import pl.edu.wszib.dao.UserDao;
 import pl.edu.wszib.domain.Product;
 import pl.edu.wszib.domain.User;
 
+import javax.annotation.security.PermitAll;
+import java.util.Map;
+
 @Controller
 public class ShopController {
 
@@ -98,5 +101,11 @@ public class ShopController {
         return "redirect:/users";
     }
 
+    @GetMapping("users/deactivate")
+    public String deactivate(User user, Model model, Long id) {
+        model.addAttribute("users", userDao.getUser());
+        userDao.deactivateUsers(id, user);
+        return "redirect:/users";
+    }
 
 }
