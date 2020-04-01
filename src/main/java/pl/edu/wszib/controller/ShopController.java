@@ -72,7 +72,7 @@ public class ShopController {
 
     @GetMapping("users")
     public String users(Model model) {
-        model.addAttribute("users", userDao.getUser());
+        model.addAttribute("users", userDao.getUsers());
         return "users";
     }
 
@@ -103,7 +103,7 @@ public class ShopController {
 
     @GetMapping("users/deactivate")
     public String deactivate(User user, Model model, Long id) {
-        model.addAttribute("users", userDao.getUser());
+        model.addAttribute("users", userDao.getUsers());
         userDao.deactivateUsers(id, user);
         return "redirect:/users";
     }
